@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="crudF1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Equipo">
+          <Key>
+            <PropertyRef Name="IdEquipo" />
+          </Key>
+          <Property Name="IdEquipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NumeroPatrocinadores" Type="int" Nullable="false" />
+          <Property Name="NumeroPilotos" Type="int" Nullable="false" />
+          <Property Name="IdPiloto" Type="int" />
+          <Property Name="Costo" Type="decimal" Precision="20" Scale="2" />
+        </EntityType>
+        <EntityType Name="Piloto">
+          <Key>
+            <PropertyRef Name="IdPiloto" />
+          </Key>
+          <Property Name="IdPiloto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombrePiloto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nacionalidad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Equipo__IdPiloto__1273C1CD">
+          <End Role="Piloto" Type="Self.Piloto" Multiplicity="0..1" />
+          <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piloto">
+              <PropertyRef Name="IdPiloto" />
+            </Principal>
+            <Dependent Role="Equipo">
+              <PropertyRef Name="IdPiloto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AddEquipo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="NumeroPatrocinadores" Type="int" Mode="In" />
+          <Parameter Name="NumeroPilotos" Type="int" Mode="In" />
+          <Parameter Name="IdPiloto" Type="int" Mode="In" />
+          <Parameter Name="Costo" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="DeleteEquipo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEquipo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAllEquipo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllPiloto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetByIdEquipo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEquipo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateEquipo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEquipo" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="NumeroPatrocinadores" Type="int" Mode="In" />
+          <Parameter Name="NumeroPilotos" Type="int" Mode="In" />
+          <Parameter Name="IdPiloto" Type="int" Mode="In" />
+          <Parameter Name="Costo" Type="decimal" Mode="In" />
+        </Function>
+        <EntityContainer Name="crudF1ModelStoreContainer">
+          <EntitySet Name="Equipo" EntityType="Self.Equipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Piloto" EntityType="Self.Piloto" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Equipo__IdPiloto__1273C1CD" Association="Self.FK__Equipo__IdPiloto__1273C1CD">
+            <End Role="Piloto" EntitySet="Piloto" />
+            <End Role="Equipo" EntitySet="Equipo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="crudF1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Equipo">
+          <Key>
+            <PropertyRef Name="IdEquipo" />
+          </Key>
+          <Property Name="IdEquipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NumeroPatrocinadores" Type="Int32" Nullable="false" />
+          <Property Name="NumeroPilotos" Type="Int32" Nullable="false" />
+          <Property Name="IdPiloto" Type="Int32" />
+          <Property Name="Costo" Type="Decimal" Precision="20" Scale="2" />
+          <NavigationProperty Name="Piloto" Relationship="Self.FK__Equipo__IdPiloto__1273C1CD" FromRole="Equipo" ToRole="Piloto" />
+        </EntityType>
+        <EntityType Name="Piloto">
+          <Key>
+            <PropertyRef Name="IdPiloto" />
+          </Key>
+          <Property Name="IdPiloto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombrePiloto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nacionalidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Equipoes" Relationship="Self.FK__Equipo__IdPiloto__1273C1CD" FromRole="Piloto" ToRole="Equipo" />
+        </EntityType>
+        <Association Name="FK__Equipo__IdPiloto__1273C1CD">
+          <End Role="Piloto" Type="Self.Piloto" Multiplicity="0..1" />
+          <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Piloto">
+              <PropertyRef Name="IdPiloto" />
+            </Principal>
+            <Dependent Role="Equipo">
+              <PropertyRef Name="IdPiloto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="crudF1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Equipoes" EntityType="Self.Equipo" />
+          <EntitySet Name="Pilotoes" EntityType="Self.Piloto" />
+          <AssociationSet Name="FK__Equipo__IdPiloto__1273C1CD" Association="Self.FK__Equipo__IdPiloto__1273C1CD">
+            <End Role="Piloto" EntitySet="Pilotoes" />
+            <End Role="Equipo" EntitySet="Equipoes" />
+          </AssociationSet>
+          <FunctionImport Name="AddEquipo">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="NumeroPatrocinadores" Mode="In" Type="Int32" />
+            <Parameter Name="NumeroPilotos" Mode="In" Type="Int32" />
+            <Parameter Name="IdPiloto" Mode="In" Type="Int32" />
+            <Parameter Name="Costo" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteEquipo">
+          <Parameter Name="IdEquipo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllEquipo" ReturnType="Collection(crudF1Model.GetAllEquipo_Result)" />
+          <FunctionImport Name="GetByIdEquipo" ReturnType="Collection(crudF1Model.GetByIdEquipo_Result)">
+          <Parameter Name="IdEquipo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateEquipo">
+            <Parameter Name="IdEquipo" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="NumeroPatrocinadores" Mode="In" Type="Int32" />
+            <Parameter Name="NumeroPilotos" Mode="In" Type="Int32" />
+            <Parameter Name="IdPiloto" Mode="In" Type="Int32" />
+            <Parameter Name="Costo" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllPiloto" ReturnType="Collection(crudF1Model.GetAllPiloto_Result)" />
+        </EntityContainer>
+        <ComplexType Name="GetAllEquipo_Result">
+          <Property Type="Int32" Name="IdEquipo" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="NumeroPatrocinadores" Nullable="false" />
+          <Property Type="Int32" Name="NumeroPilotos" Nullable="false" />
+          <Property Type="Decimal" Name="Costo" Nullable="true" Precision="20" Scale="2" />
+          <Property Type="Int32" Name="IdPiloto" Nullable="true" />
+          <Property Type="String" Name="NombrePiloto" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Nacionalidad" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetByIdEquipo_Result">
+          <Property Type="Int32" Name="IdEquipo" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="NumeroPatrocinadores" Nullable="false" />
+          <Property Type="Int32" Name="NumeroPilotos" Nullable="false" />
+          <Property Type="Decimal" Name="Costo" Nullable="true" Precision="20" Scale="2" />
+          <Property Type="Int32" Name="IdPiloto" Nullable="true" />
+          <Property Type="String" Name="NombrePiloto" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Nacionalidad" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAllPiloto_Result">
+          <Property Type="Int32" Name="IdPiloto" Nullable="false" />
+          <Property Type="String" Name="NombrePiloto" Nullable="false" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="crudF1ModelStoreContainer" CdmEntityContainer="crudF1Entities">
+          <EntitySetMapping Name="Equipoes">
+            <EntityTypeMapping TypeName="crudF1Model.Equipo">
+              <MappingFragment StoreEntitySet="Equipo">
+                <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="NumeroPatrocinadores" ColumnName="NumeroPatrocinadores" />
+                <ScalarProperty Name="NumeroPilotos" ColumnName="NumeroPilotos" />
+                <ScalarProperty Name="IdPiloto" ColumnName="IdPiloto" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pilotoes">
+            <EntityTypeMapping TypeName="crudF1Model.Piloto">
+              <MappingFragment StoreEntitySet="Piloto">
+                <ScalarProperty Name="IdPiloto" ColumnName="IdPiloto" />
+                <ScalarProperty Name="NombrePiloto" ColumnName="NombrePiloto" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="Nacionalidad" ColumnName="Nacionalidad" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddEquipo" FunctionName="crudF1Model.Store.AddEquipo" />
+          <FunctionImportMapping FunctionImportName="DeleteEquipo" FunctionName="crudF1Model.Store.DeleteEquipo" />
+          <FunctionImportMapping FunctionImportName="GetAllEquipo" FunctionName="crudF1Model.Store.GetAllEquipo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="crudF1Model.GetAllEquipo_Result">
+                <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="NumeroPatrocinadores" ColumnName="NumeroPatrocinadores" />
+                <ScalarProperty Name="NumeroPilotos" ColumnName="NumeroPilotos" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="IdPiloto" ColumnName="IdPiloto" />
+                <ScalarProperty Name="NombrePiloto" ColumnName="NombrePiloto" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="Nacionalidad" ColumnName="Nacionalidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetByIdEquipo" FunctionName="crudF1Model.Store.GetByIdEquipo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="crudF1Model.GetByIdEquipo_Result">
+                <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="NumeroPatrocinadores" ColumnName="NumeroPatrocinadores" />
+                <ScalarProperty Name="NumeroPilotos" ColumnName="NumeroPilotos" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="IdPiloto" ColumnName="IdPiloto" />
+                <ScalarProperty Name="NombrePiloto" ColumnName="NombrePiloto" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="Nacionalidad" ColumnName="Nacionalidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateEquipo" FunctionName="crudF1Model.Store.UpdateEquipo" />
+          <FunctionImportMapping FunctionImportName="GetAllPiloto" FunctionName="crudF1Model.Store.GetAllPiloto">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="crudF1Model.GetAllPiloto_Result">
+                <ScalarProperty Name="IdPiloto" ColumnName="IdPiloto" />
+                <ScalarProperty Name="NombrePiloto" ColumnName="NombrePiloto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

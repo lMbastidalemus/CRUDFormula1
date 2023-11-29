@@ -1,0 +1,58 @@
+﻿@model ML.Equipo
+@{
+    ViewBag.Title = "Form";
+}
+
+
+@using (Html.BeginForm("Form", "Equipo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(model => model.IdEquipo)
+    <form class="form-control">
+        <div class="container row">
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Nombre)
+                @Html.TextBoxFor(model => model.Nombre)
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.NumeroPatrocionadores)
+                @Html.TextBoxFor(model => model.NumeroPatrocionadores)
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.NumeroPilotos)
+                @Html.TextBoxFor(model => model.NumeroPilotos)
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Costo)
+                @Html.TextBoxFor(model => model.Costo)
+            </div>
+        </div>
+
+        <div class="container row">
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Piloto.IdPiloto)
+                @Html.DropDownListFor(model => model.Piloto.IdPiloto, new SelectList(Model.Piloto.Pilotos, "IdPiloto", "NombrePiloto"), "selecciona el piloto")
+            </div>
+          
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Piloto.ApellidoPaterno)
+                @Html.TextBoxFor(model => model.Piloto.ApellidoPaterno)
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Piloto.ApellidoMaterno)
+                @Html.TextBoxFor(model => model.Piloto.ApellidoMaterno)
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Piloto.Nacionalidad)
+                @Html.TextBoxFor(model => model.Piloto.Nacionalidad)
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+}
+

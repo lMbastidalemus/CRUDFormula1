@@ -1,0 +1,54 @@
+﻿@model ML.Equipo
+@{
+    ViewBag.Title = "GetAll";
+}
+
+<div class="modal-title">
+    <h2>Listado de Equipo</h2>
+</div>
+
+<div style="margin-top:3rem; margin-bottom:2rem">
+    <a class="btn btn-success" href="@Url.Action("Form", "Equipo")">Agregar</a>
+</div>
+
+<div class="table-responsive">
+    <table class="table">
+       <thead>
+           <tr>
+               <th>Equipo</th>
+               <th>Numero de Patrocinadores</th>
+               <th>Numero de Pilotos</th>
+               <th>Costo del Equipo</th>
+               <th>IdPiloto</th>
+               <th>Nombre</th>
+               <th>Apellido Paterno</th>
+               <th>Apellido Materno</th>
+               <th>Nacionalidad</th>
+           </tr>
+       </thead>
+        <tbody>
+            @foreach (ML.Equipo equipo in Model.Equipos)
+            {
+                <tr>
+                    <th>
+                        <a class="btn btn-warning" href="@Url.Action("Form", "Equipo", new {IdEquipo = equipo.IdEquipo})">Editar</a>
+                    </th>
+                    <th>@equipo.Nombre</th>
+                    <th>@equipo.NumeroPatrocionadores</th>
+                    <th>@equipo.NumeroPilotos</th>
+                    <th>@equipo.Costo</th>
+                    <th>@equipo.Piloto.IdPiloto</th>
+                    <th>@equipo.Piloto.NombrePiloto</th>
+                    <th>@equipo.Piloto.ApellidoPaterno</th>
+                    <th>@equipo.Piloto.ApellidoMaterno</th>
+                    <th>@equipo.Piloto.Nacionalidad</th>
+                   
+                    <th>
+                        <a class="btn btn-warning" href="@Url.Action("Delete", "Equipo", new {IdEquipo = equipo.IdEquipo})" onclick="return confirm('Seguro de eliminar el equipo?');">Eliminar</a>
+                    </th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
